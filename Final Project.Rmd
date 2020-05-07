@@ -2,8 +2,11 @@
 title: "Final Project"
 author: "Jordan Denish and Malcolm Mashig"
 date: "5/7/2020"
-output: html_document
+output: 
+  html_document:
+  theme: cerulean  
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -14,8 +17,6 @@ Generate a publishable Rmarkdown document with the following sections:
 # Introduction
 
 For this final project, we want to create an interactive data visualization for a Capstone group project that we worked on throughout the semester. We have developed a Shiny Application on R using the information from class lectures and by teaching ourselves how Shiny works online. We are very excited about this application because it is much easier for people to use our app than read our 20 page report.
-
-
 
 ## Question and background information on the data and why you are asking this question(s).  References to previous research/evidence generally would be nice to include.
 
@@ -56,6 +57,12 @@ fangraphs_clean %>%
       labs(title = "Change in xFIP from age 28 to 29 is normal")
 ```
 
+## xFIP
+
+One of the most important decisions we had to make as a group was choosing which metric to evaluate pitchers on, as there are many such statistics that each have strengths and weaknesses. We wanted to choose a metric that was descriptive, in that it encapsulates valuable information, and predictive, in that it is relatively stable year-to-year. The traditional metric for measuring pitcher success is Earned Run Average (ERA), an easy to understand statistic which simply divides the number of earned runs a pitcher allows by the number of innings he pitches, and then multiplies this average by nine to mimic the length of a baseball game. ERA makes sense as a critical performance measure, as a pitcher’s primary goal for his team is to prevent runs, and a pitcher’s ERA will show how effective he was. However, ERA has many issues that have caused most baseball analysts to move beyond it. For one, the fielding of the team around a pitcher is not included in the metric, which certainly has an impact on the number of runs that he gives up. A pitcher with a better defense is more likely to have a lower ERA than a pitcher with a worse defense. Another negative aspect of ERA is that it includes no information about the ballpark that the pitcher plays in. For instance, Coors Field of the Colorado Rockies is notoriously easy to hit home runs in, as balls fly farther in the high elevation of Denver. On the other end of the spectrum, Petco Park of the San Diego Padres has deep fences and a spacious outfield which are hostile to hitters. Since the environment that pitchers play in varies so much from pitcher to pitcher, a metric like ERA has major flaws that make it difficult to encapsulate a pitcher’s true value. 
+Due to these flaws, we eventually decided to use a statistic named 
+Expected Fielding Independent Pitching (xFIP), which is an advanced baseball statistic that is an estimate for a pitcher’s earned run average (ERA). A pitcher’s main objective is to prevent runs and xFIP is considered to be a better predictor of future performance than ERA, which can mask the actual 
+skill of a pitcher. xFIP is a common estimate for a pitcher’s ERA that only factors in the batter outcomes that a pitcher can control (strikeouts, walks, and hit by pitches) while also normalizing for home runs allowed by using the league average home run/fly ball rate. xFIP is calculated using the formula xFIP = ((13*(Fly balls * lgHR/FB%))+(3*(BB+HBP))-(2*K))/IP + constant. The constant is generally around 3.10, which helps adjust the xFIP value to an ERA scale.
 
 ## Research Question
 
