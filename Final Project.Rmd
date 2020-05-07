@@ -43,6 +43,36 @@ For example, we could use additional predictors such as fastball velocity and fa
 
 With this modeling process framework, we were able to predict standardized xFIP for a pitcher multiple years in the future. Once again, we predicted one year in the future, and then used the predicted xFIP value as input for the lagxFIP variable in order to predict the xFIP two years in the future. Each new year out that we predicted, we increased age by one and used the predictions for the last year (fastball velocity, fastball percentage, and xFIP) as input for the next round of submodel and model predictions. We used the model to generate xFIP predictions for the next three seasons, 2020, 2021, and 2022. Going three seasons into the future paints a meaningful picture of the pitcher’s projected performance, and predicting any further resulted in increasingly reduced accuracy and higher variance.
 
+## Model Building
+
+We started with a “submodel” that predicts standardized fastball velocity based on the age of the pitcher and their fastball velocity in the season prior. The model has the following form:
+
+Submodel 1:
+FBv = B0 + B1(lagFBv) + B2(age) + B3(young) + B4(prime) + B5(age*young) + B6(age*prime) 
+FBv = 0.318 + 0.935(lagFBv) + -0.016(age) + 0.508(young) + 0.278(prime) + -0.020(age*young) + -0.009(age*prime) 
+
+FBv represents the standardized fastball velocity that we want to predict (for the upcoming season). LagFBv represents standardized fastball velocity for the year prior. Age represents the age of the pitcher for the year of the prediction. Since age increases by one for each pitcher each year, we always know age in the year of the prediction. Young represents a dummy variable that is 1 when the player is younger than 25 years old in the year of prediction and 0 otherwise. Prime represents a second dummy variable that is 1 when the player is between the ages of 25 and 31 and 0 otherwise. If both young and prime are 0, then the pitcher is above 31 and classified as old.
+Next, we moved onto a “submodel” that predicts standardized fastball percentage based on the age of the pitcher and their fastball percentage in the season prior. The model has the following form:
+
+Submodel 2:
+FBp = B0 + B1(lagFBp) + B2(age) + B3(young) + B4(prime) + B5(age*young) + B6(age*prime) 
+FBp = -0.094+0.866(lagFBp) +0.001(age) -0.079(young) +0.249(prime) + 0.006(age*young) - 0.007(age*prime)
+
+FBp represents the standardized fastball percentage that we want to predict. LagFBp represents standardized fastball percentage for the year prior. Age, young, and prime have the same meaning as in the fastball velocity submodel.
+With the ability to make predictions for fastball velocity and fastball percentage for pitchers in a future year based on the latest available year, we have all the predictors necessary to make predictions for xFIP. We can now create three main xFIP models with the following forms that predict standardized xFIP based on 1,2, or 3 previous years of data.
+
+Model 1:
+xFIP= B0 + B1(lagxFIP) + B2(age) + B3(predictedFBv) + B4(predictedFBp) 
+xFIP= -0.388 + 0.639(lagxFIP) + 0.014(age) + -0.115(predictedFBv) + -0.0025(predictedFBp) 
+
+Model 2:
+xFIP= B0 + B1(lagxFIP) + B2(age) + B3(predictedFBv) + B4(predictedFBp) + B5(lagxFIP2)  
+xFIP= -0.324 + -0.014(lagxFIP) + 0.014(age) + -0.102(predictedFBv) + -0.014(predictedFBp) + 0.484(lagxFIP2)  
+
+Model 3:
+xFIP= B0 + B1(lagxFIP) + B2(age) + B3(predictedFBv) + B4(predictedFBp) + B5(lagxFIP2) + B6(lagxFIP3) 
+xFIP= -0.267 + 0.465(lagxFIP) + 0.012(age) + -0.109(predictedFBv) + -0.007(predictedFBp) + 0.264(lagxFIP2) + 0.036(lagxFIP3) 
+
 ## Analysis
 
 ```{r }
