@@ -27,6 +27,35 @@ After refining our ideas, we gathered the data relevant to our project. We took 
 
 ## Exploratory Data Analysis – Initial summary statistics and graphs with an emphasis on variables you believe to be important for your analysis.
 
+As you can see by the change in fastball velocity and xFIP since 2002, the percentiles have kept a consistent distance. This shows us that standardizing variables like fastball velocity and xFIP will help to mitigate the influence of changes in the game of baseball over time on our analysis
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("Exploration.R")
+```
+
+```{r}
+plot1
+plot3
+```
+
+The plots below show the characteristics of the fastball velocity and xFIP variables. We know from them that fastball velocity generally declines as a pitcher ages, which is expected, and that the change in xFIP for players at a certain age has a generally normal distribution. This was the case for players at the age of 28 and at most other ages
+
+```{r}
+fangraphs_clean %>% 
+      group_by(Age) %>% 
+      summarise(avg_fastball_velocity = mean(FBv, na.rm = TRUE)) %>% 
+      filter(between(Age, 20, 38)) %>% 
+      ggplot() +
+      geom_line(aes(Age, avg_fastball_velocity), color = "blue") +
+      labs(title = "Fastball Velocity steadily decreases as players age")
+fangraphs_clean %>% 
+      mutate(change_in_xFIP = lead(xFIP) - xFIP) %>% 
+      filter(Age == 28) %>% 
+      ggplot() +
+      geom_density(aes(change_in_xFIP), fill = "blue") +
+      labs(title = "Change in xFIP from age 28 to 29 is normal")
+```
+
 
 ## Research Question
 
