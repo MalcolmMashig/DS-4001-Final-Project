@@ -70,7 +70,7 @@ percentiles <- data.frame("Year" = years3, "Velocity" = vel, "Percentile"  = per
 plot1 <- ggplot(percentiles, aes(x=Year, y=Velocity, color = Percentile)) + geom_line() + geom_point() +
   labs(title="Fastball Velocity Percentiles by Year", y="Fastball Velocity") +
   scale_x_continuous(breaks=seq(2002,2018,2)) + scale_y_continuous(breaks=seq(87, 95, 1))
-plot1
+# plot1
 
 ## CONCLUSION: It appears that fastball velocities across the spectrum of pitchers are going up together.
 ## Therefore, standardization will probably be sufficient. However,  it looks like the 90th percentile may
@@ -83,31 +83,31 @@ df2002 <- filter(careers_clean, Season==2002)
 df2002 <- filter(df2002, IP >= 30)
 plot2002 <- ggplot(df2002, aes(x=FBv)) + geom_histogram(color='black', fill='white',bins=20) + 
   labs(title="2002 Fastball Velocity", x="Velocity") + theme(plot.title = element_text(hjust = 0.5))
-plot2002
+# plot2002
 
 df2010 <- filter(careers_clean, Season==2010)
 df2010 <- filter(df2010, IP >= 30)
 plot2010 <- ggplot(df2010, aes(x=FBv)) + geom_histogram(color='black', fill='white',bins=20) + 
   labs(title="2010 Fastball Velocity", x="Velocity") + theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_continuous(breaks=seq(75,95,5))
-plot2010
+# plot2010
 
 df2015 <- filter(careers_clean, Season==2015)
 df2015 <- filter(df2015, IP >= 30)
 plot2015 <- ggplot(df2015, aes(x=FBv)) + geom_histogram(color='black', fill='white',bins=20) + 
   labs(title="2015 Fastball Velocity", x="Velocity") + theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_continuous(breaks=seq(75,95,5))
-plot2015
+# plot2015
 
 df2019 <- filter(careers_clean, Season==2019)
 df2019 <- filter(df2019, IP >= 30)
 plot2019 <- ggplot(df2019, aes(x=FBv)) + geom_histogram(color='black', fill='white',bins=20) + 
   labs(title="2019 Fastball Velocity", x="Velocity") + theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_continuous(breaks=seq(75,95,5))
-plot2019
+# plot2019
 
-hists <- grid.arrange(plot2002, plot2010, plot2015, plot2019)
-hists
+# hists <- grid.arrange(plot2002, plot2010, plot2015, plot2019)
+# hists
 
 # 3. has xFip changed over time
 
@@ -172,7 +172,7 @@ percentiles <- data.frame("Year" = years3, "xFIP" = xfip, "Percentile"  = percen
 plot3 <- ggplot(percentiles, aes(x=Year, y=xFIP, color = Percentile)) + geom_line() + geom_point() +
   labs(title="xFIP Percentiles by Year", y="xFIP") +
   scale_x_continuous(breaks=seq(2002,2018,2)) 
-plot3
+# plot3
 
 ## Really interesting - seems like FBv the league tends to go in the same direction - fell off hard from 2006 to
 ## 2014 or so, then jumped back up. Either random variation, or home run boom has hurt pitchers in xFIP (since
