@@ -29,15 +29,6 @@ ui <- navbarPage("",
           fluidPage(
             titlePanel("Capstone Project"),
             mainPanel(
-              h3("Question & Background Information"),
-              p("For our capstone project, we wanted to analyze Major League Baseball, hoping to use historical data and various statistics in order to predict player value and make conclusions about the sport. We narrowed our focus to be more specific, ultimately choosing to analyze and project future performance of starting pitchers. Our inspiration for picking this particular position came from the fact that starting pitchers have become increasingly important and prominent among playoff contending teams. The Washington Nationals, the winner of the 2019 World Series, for example, were anchored by three elite, highly-paid starting pitchers in Max Scherzer, Stephen Strasburg, and Patrick Corbin. Furthermore, the size and length of the contracts that teams are giving to starting pitchers are tremendously large. This past winter, during baseball’s free agency, over 1 billion dollar was spent on starting pitchers, the most free agency dollars spent on starting pitchers in baseball history. Free agent Gerrit Cole signed a nine-year, 324 million dollar contract with the New York Yankees, which is the largest deal ever signed by a pitcher. Gerrit Cole is currently 29 years old, which is considered to be one of the prime years for a starting pitcher, but he will be 38 years old at the end of his contract, when most pitchers are already in decline and considering retirement. Only the big market baseball teams like New York, Boston, and Philadelphia have the spending capabilities to afford these massive free agent signings, while the smaller market teams like Tampa Bay and Oakland must find cheap alternatives in order to be able to compete. This relatively recent trend in the importance that the sport is placing on finding valuable starting pitching led us to make it the concentration of our capstone project."),
-              h3("Exploratory Data Analysis"),
-              p("As you can see by the change in fastball velocity and xFIP since 2002, the percentiles have kept a consistent distance. This shows us that standardizing variables like fastball velocity and xFIP will help to mitigate the influence of changes in the game of baseball over time on our analysis"),
-              plotOutput("fbplot"),
-              plotOutput("xfipplot"),
-              p("The plots below show the characteristics of the fastball velocity and xFIP variables. We know from them that fastball velocity generally declines as a pitcher ages, which is expected, and that the change in xFIP for players at a certain age has a generally normal distribution. This was the case for players at the age of 28 and at most other ages"),
-              plotOutput("fbvchange"),
-              plotOutput("xfipnormal"),
               h3("Introduction"),
               p("This shiny app is a University of Virginia capstone project in statistics, created by second-year 
                 students Devan Bose, Jordan Denish, Malcolm Mashig, and Christian Rogers. We created a model to predict 
@@ -97,29 +88,6 @@ ui <- navbarPage("",
           )))
 
 server <- function(input, output) {
-  output$fbplot <- renderPlot({
-    plot1
-  })
-  output$xfipplot <- renderPlot({
-    plot3
-  })
-  output$fbvchange <- renderPlot({
-    fangraphs_clean %>% 
-      group_by(Age) %>% 
-      summarise(avg_fastball_velocity = mean(FBv, na.rm = TRUE)) %>% 
-      filter(between(Age, 20, 38)) %>% 
-      ggplot() +
-      geom_line(aes(Age, avg_fastball_velocity), color = "blue") +
-      labs(title = "Fastball Velocity steadily decreases as players age")
-  })
-  output$xfipnormal <- renderPlot({
-    fangraphs_clean %>% 
-      mutate(change_in_xFIP = lead(xFIP) - xFIP) %>% 
-      filter(Age == 28) %>% 
-      ggplot() +
-      geom_density(aes(change_in_xFIP), fill = "blue") +
-      labs(title = "Change in xFIP from age 28 to 29 is normal")
-  })
   output$calculatedVal <- renderTable({
     calcFuture <- data_frame(lag_xfip = NA, lag_fbv = NA, lag_fbp = NA, lag_age = NA, lag_xfip2 = NA)
     tnt <- fangraphs_clean %>% 
