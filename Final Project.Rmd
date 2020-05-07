@@ -39,7 +39,7 @@ Rather than using this same model to predict multiple years in advance, we used 
 
 For example, we could use additional predictors such as fastball velocity and fastball percentage (percentage of pitches that are fastballs) in 2019 to predict 2020’s xFIP; then, with our submodels, we could project each of the other unknown predictors that are inputs in our main model in 2020. We would then be able to plug these predicted values into our main model to predict 2021 xFIP and continue the process into the future. This is relevant because there were a large number of explanatory variables that could have potentially been used in our model, such as age, years of experience, or pitcher type, and would be known as predictions were made through the future. We can assume age increases by one each year, but we needed submodels that could estimate values for the explanatory variables that change from year to year and depend on additional inputs, such as fastball velocity. 
 
-With this modeling process framework, we were able to predict standardized xFIP for a pitcher multiple years in the future. Once again, we predicted one year in the future, and then used the predicted xFIP value as input for the lagxFIP variable in order to predict the xFIP two years in the future. Each new year out that we predicted, we increased age by one and used the predictions for the last year (fastball velocity, fastball percentage, and xFIP) as input for the next round of submodel and model predictions. We planned to use the model to generate xFIP predictions for the next three seasons, 2020, 2021, and 2022. Going three seasons into the future paints a meaningful picture of the pitcher’s projected performance, and predicting any further resulted in increasingly reduced accuracy and higher variance.
+With this modeling process framework, we were able to predict standardized xFIP for a pitcher multiple years in the future. Once again, we predicted one year in the future, and then used the predicted xFIP value as input for the lagxFIP variable in order to predict the xFIP two years in the future. Each new year out that we predicted, we increased age by one and used the predictions for the last year (fastball velocity, fastball percentage, and xFIP) as input for the next round of submodel and model predictions. We used the model to generate xFIP predictions for the next three seasons, 2020, 2021, and 2022. Going three seasons into the future paints a meaningful picture of the pitcher’s projected performance, and predicting any further resulted in increasingly reduced accuracy and higher variance.
 
 ## Analysis
 
@@ -53,9 +53,6 @@ TestError
 ```
 
 	The table above displays our average residuals from using our training model to predict test data xFIP values. The above errors represent the average distance that the predictions are away from the actual xFIP values for each of the three seasons in the future. This means that on average, we would expect our test predictions for years 2020, 2021, and 2022 to be off by about 0.35, 0.44, and 0.48 from the actual xFIP values respectively. We are pleased that these values are not much higher than our training absolute error, which means that we would expect our model to perform almost as well when predicting future xFIP values than the existing xFIP values. 
-	
-	
-
 
 
 ## Conclusions – What can you say about the results of the methods section as it relates to your question.
