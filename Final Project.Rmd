@@ -70,13 +70,7 @@ skill of a pitcher. xFIP is a common estimate for a pitcher’s ERA that only fa
 
 Once we were satisfied and confident in using xFIP as our performance metric, we were able to clearly state our research question: Can we accurately predict an MLB starting pitcher’s future xFIP over the next few seasons using various performance statistics from prior seasons in order to estimate relative future value of the pitcher? Simply put, we wanted to create a model that could take any pitcher, along with the statistics of all of their previous seasons, as an input and make projections for the xFIP of their next few seasons. From our main research question, two sub-questions naturally emerged as well. In particular, we wanted to look at how pitchers “aged”, or how their performance was affected as they got older, as well as whether all prior seasons were equally predictive or if more recent seasons were more important predictors of future xFIP. Our data set provided us with all of the relevant and necessary information to model xFIP over time, as well as answer our sub-questions. Further, viewing our data as a sample of the population of all starting pitcher seasons with at least 80 innings pitched, both past and future, we will be able to generalize our results to future seasons.
 
-
-<<<<<<< HEAD
-
 ### Methods
-=======
-### Methods – Techniques you are using to address your question and the results of those methods.
->>>>>>> c2e0405f4d90df6eb3664efbd350bd0933a1d061
 
 In order to develop predictions for xFIP, we used a process named lagged linear regression. The theory of our lagged linear regression xFIP model is derived from the idea that in order to generate predictions for the next three years, we would want to produce incremental predictions. If we are looking at a pitcher's performance in 2019, we will first predict xFIP in 2020 and then use that prediction to generate our second prediction in 2021. Finally, we will use the prediction in 2021 to predict the pitcher’s xFIP value in 2022. 
 
