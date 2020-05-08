@@ -18,7 +18,7 @@ DS 4001 Final Project: Data Visualization for our Capstone Project
 
 For this final project, we want to create an interactive data visualization for a Capstone group project that we worked on throughout the semester. We have developed a Shiny Application on R using the information from class lectures and by teaching ourselves how Shiny works online. We are very excited about this application because it is much easier for people to use our app than read our 20 page report.
 
-### Question and background information on the data and why you are asking this question(s).  References to previous research/evidence generally would be nice to include.
+### Question and Background Information
 
 For our capstone project, we wanted to analyze Major League Baseball, hoping to use historical data and various statistics in order to predict player value and make conclusions about the sport. We narrowed our focus to be more specific, ultimately choosing to analyze and project future performance of starting pitchers. Our inspiration for picking this particular position came from the fact that starting pitchers have become increasingly important and prominent among playoff contending teams. The Washington Nationals, the winner of the 2019 World Series were anchored by three elite, highly-paid starting pitchers in Max Scherzer, Stephen Strasburg, and Patrick Corbin. 
 
@@ -26,7 +26,7 @@ Furthermore, the size and length of the contracts that teams are giving to start
 
 After refining our ideas, we gathered the data relevant to our project. We took the approach of collecting a large amount of data, hoping this would help us further revise and pinpoint a particular question of interest. A website called FanGraphs was very helpful in this data collection process, containing seemingly every imaginable statistic for every player, separated by season. The site also provided the ability for us to filter the data based on position and various other criteria and easily export the data as a CSV formatted file. We decided to harvest all available starting pitcher data, with two significant constraints. First, we limited how far back our data went to the year 2002. Knowing that only somewhat recent data would be useful for drawing conclusions about the future, coupled with the fact that several advanced baseball metrics, such as xFIP and BABIP, have only been tracked since 2002, it made sense to cut the data off at this year. Our other constraint was that we limited the data to the seasons where the pitcher threw at least 80 innings. Though this admittedly is a somewhat arbitrary cutoff, our experimentation found that this excluded artificially short seasons, usually due to injury, while still providing a large amount of data to analyze. Further, after substantial back and forth consideration about whether to consider injuries, we decided not to pursue this analysis, as the extreme amount of randomness in injuries would likely prevent us from coming away with any meaningful results. Thus, our complete data set included all relevant performance statistics for each season with at least 80 innings pitched for every starting pitcher from 2002-2019. 
 
-### Exploratory Data Analysis – Initial summary statistics and graphs with an emphasis on variables you believe to be important for your analysis.
+### Exploratory Data Analysis
 
 As you can see by the change in fastball velocity and xFIP since 2002, the percentiles have kept a consistent distance. This shows us that standardizing variables like fastball velocity and xFIP will help to mitigate the influence of changes in the game of baseball over time on our analysis
 
@@ -72,7 +72,7 @@ Once we were satisfied and confident in using xFIP as our performance metric, we
 
 
 
-### Methods – Techniques you are using to address your question and the results of those methods.
+### Methods
 
 In order to develop predictions for xFIP, we used a process named lagged linear regression. The theory of our lagged linear regression xFIP model is derived from the idea that in order to generate predictions for the next three years, we would want to produce incremental predictions. If we are looking at a pitcher's performance in 2019, we will first predict xFIP in 2020 and then use that prediction to generate our second prediction in 2021. Finally, we will use the prediction in 2021 to predict the pitcher’s xFIP value in 2022. 
 
@@ -126,7 +126,7 @@ TestError
 The table above displays our average residuals from using our training model to predict test data xFIP values. The above errors represent the average distance that the predictions are away from the actual xFIP values for each of the three seasons in the future. This means that on average, we would expect our test predictions for years 2020, 2021, and 2022 to be off by about 0.35, 0.44, and 0.48 from the actual xFIP values respectively. We are pleased that these values are not much higher than our training absolute error, which means that we would expect our model to perform almost as well when predicting future xFIP values than the existing xFIP values. 
 
 
-## Conclusions – What can you say about the results of the methods section as it relates to your question.
+## Conclusions
 
 Through analyzing our model’s predictions, we have been able to draw a number of conclusions about starting pitchers in baseball. An important inference we were able to draw is that the typical baseball pitcher’s career follows an arc in which their performance steadily improves in their early years in the league, plateaus in their prime, around the 27 to 31 age range, and quickly declines in their later years, often even “falling off a cliff”. Our model also provided a good, real example of the fact that while outliers certainly do exist, regression to the mean is much more prominent. Essentially, we should not expect pitchers to remain excellent for extended periods of time because it is really difficult to do. However, this also means that pitchers who can consistently maintain excellence should be perceived as extremely valuable. 
 
@@ -137,7 +137,7 @@ Another conclusion we were able to draw is that fastball velocity shares a very 
 Additionally, we also learned that predicting baseball is a very complicated concept. While we are able to estimate xFIP values with reasonable accuracy, there would need to be many more model adjustments to allow a baseball general manager to make decisions about player personnel. Teams have to assess the health of the athletes, the potential variability of their performance, and their importance to the franchise as a teammate and role model. If a pitcher is expected to have an extremely low xFIP but only stays healthy for half of the season, how should that pitcher compare to an average pitcher who has stayed healthy his entire career? General managers have to be able to assess the talent that is available in the league at each position, and the replacement level value of pitchers in each team’s farm system or in free agency.
 
 
-### Future work – What additional analysis is needed or what limited your analysis on this project.
+### Future work
 
 If we were to build upon our analysis further, there would be certain directions in which we would want to move forward. The baseball world is currently on hold due to the Coronavirus pandemic, but once baseball returns, it would be very valuable to evaluate our predictions for 2020 against the real season. We would have the opportunity to adjust our model appropriately. The game of baseball is constantly changing, and we expect our model to continuously evolve so that it can be as accurate as possible.
 
